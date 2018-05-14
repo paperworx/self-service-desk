@@ -4,6 +4,13 @@ function loadPage(page, post, args) {
   var dir = "/app/pages/";
   var file = dir + page + ".php";
 
+  if(page !== "login") {
+    processing = false;
+    if(typeof timeout !== "undefined") {
+      clearTimeout(timeout);
+    }
+  }
+
   if(post) {
     if(processing) {
       console.error("Tried to scan another card while processing!");

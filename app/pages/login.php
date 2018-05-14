@@ -37,7 +37,7 @@
     } elseif($user['status'] == "NO_CONNECTION") {
       $error = "Connection Failure";
     } elseif($user['status'] == "DISABLED") {
-      $error = "Account Disabled";
+      $error = "Account Deactivated";
     } else {
       $error = "Unknown Error";
     }
@@ -72,14 +72,14 @@
       <script type="text/javascript">
         processing = true;
 
-        window.setTimeout(function() {
+        var timeout = setTimeout(function() {
           processing = false;
           loadPage("login");
         }, 2500);
       </script>
 REDIRECT;
     } else {
-      echo 'Waiting For Card';
+      echo 'Scan Card Now';
     }
   ?>
 </div>

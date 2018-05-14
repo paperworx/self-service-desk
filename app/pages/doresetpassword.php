@@ -15,6 +15,8 @@
     return;
   }
 
+  require_once __DIR__ . '\..\..\backend\servicelog.php';
+
   $activedirectory = new ActiveDirectory();
 
   $password = $activedirectory->generatePassword();
@@ -26,6 +28,7 @@
 <style>
   #passwordinfo {
     font-size: 4rem;
+    font-weight: bold;
   }
 </style>
 
@@ -36,6 +39,9 @@
     echo "Take a picture, memorize or write down the above.<br><br>";
     echo "You will be required to pick your own password again after logging in.<br><br>";
     echo "<strong>Press logout below to finish.</strong>";
+
+    $servicelog = new ServiceLog();
+    $servicelog->logEvent($_SESSION['name'] . " has reset their password.");
   } elseif($status == "DISABLED") {
     header('Location: /pages/logout.php');
     return;
@@ -47,13 +53,7 @@
 ?>
 
 <div class="subbuttons">
-  <?php
-    if($status == "SUCCESS") {
-      echo '<a class="button small" onclick="loadPage(\'logout\'); return false;">Logout</a>';
-    } else {
-      echo '<a class="button small" onclick="loadPage(\'resetpassword\'); return false;">Go Back</a>';
-    }
-  ?>
+  <a class="button small" onclick="loadPage('logout'); return false;">Logout</a>
 </div>
 
 <?php $password = ""; ?>

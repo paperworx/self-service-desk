@@ -1,2 +1,3 @@
 # self-service-desk
-Self service password reset for linked RFID cards on AD.
+
+A self service password reset PHP web application for linked RFID cards on Active Directory.

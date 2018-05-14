@@ -5,29 +5,28 @@ require_once __DIR__ . '\main.php';
 class ActiveDirectory extends SelfServiceDesk {
 
   public function generatePassword() {
-    $prefix[] = "Computing";
-    $prefix[] = "Positive";
-    $prefix[] = "Packet";
-    $prefix[] = "Physics";
-    $prefix[] = "Enhance";
-    $prefix[] = "Electron";
-    $prefix[] = "Quality";
-    $prefix[] = "Assembly";
-    $prefix[] = "Energy";
-    $prefix[] = "Document";
+    $words[] = "Computing";
+    $words[] = "Positive";
+    $words[] = "Packet";
+    $words[] = "Physics";
+    $words[] = "Enhance";
+    $words[] = "Electron";
+    $words[] = "Quality";
+    $words[] = "Assembly";
+    $words[] = "Energy";
+    $words[] = "Document";
+    $words[] = "Broadcast";
+    $words[] = "Quarter";
+    $words[] = "Service";
+    $words[] = "Approval";
+    $words[] = "Contact";
+    $words[] = "Session";
+    $words[] = "Classify";
+    $words[] = "Persist";
+    $words[] = "Exceed";
+    $words[] = "Autonomy";
 
-    $suffix[] = "Broadcast";
-    $suffix[] = "Quarter";
-    $suffix[] = "Service";
-    $suffix[] = "Approval";
-    $suffix[] = "Contact";
-    $suffix[] = "Session";
-    $suffix[] = "Classify";
-    $suffix[] = "Persist";
-    $suffix[] = "Exceed";
-    $suffix[] = "Autonomy";
-
-    $word = $prefix[rand(0, count($prefix) - 1)] . $suffix[rand(0, count($prefix) - 1)];
+    $word = $words[rand(0, count($words) - 1)];
     $number = rand(10, 99);
     $symbol = (rand(0, 1) ? "?" : "!");
     $password = $word . $number . $symbol;
@@ -70,14 +69,12 @@ class ActiveDirectory extends SelfServiceDesk {
     if($accountDisabled)
       return ['status' => "DISABLED"];
 
-    if($ident == $card) {
-      $info = [
-        'name' => $displayName,
-        'username' => $sAMAccountName,
-        'card' => $ident,
-        'status' => "SUCCESS"
-      ];
-    }
+    $info = [
+      'name' => $displayName,
+      'username' => $sAMAccountName,
+      'card' => $ident,
+      'status' => "SUCCESS"
+    ];
 
     return $info;
   }

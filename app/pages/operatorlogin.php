@@ -14,7 +14,7 @@
     $servicelog = new ServiceLog();
     
     if($_POST['passcode'] === SERVICE_PIN) {
-      $servicelog->logEvent("Operator logged in.");
+      $servicelog->logEvent("Operator mode engaged.");
       
       $_SESSION['operator_mode'] = true;
       

@@ -10,7 +10,7 @@
   $servicelog = new ServiceLog();
 
   if(isset($_SESSION['operator_mode']) && $_SESSION['operator_mode']) {
-    $servicelog->logEvent("Operator logged out.");
+    $servicelog->logEvent("Operator mode disengaged.");
   } else {
     $servicelog->logEvent($_SESSION['name'] . " logged out.");
   }
