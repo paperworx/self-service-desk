@@ -3,10 +3,10 @@
 
   session_start();
 
-  $_SESSION['page'] = "doresetpassword";
-
   if(!isset($_SESSION['card']))
     die('User is not authenticated.');
+
+  $_SESSION['page'] = "doresetpassword";
 
   require_once __DIR__ . '\..\..\backend\activedirectory.php';
 

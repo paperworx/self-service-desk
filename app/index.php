@@ -1,12 +1,27 @@
 <?php
   require_once __DIR__ . '\..\config.php';
 
+  $isLocal = ($_SERVER['REMOTE_ADDR'] == $_SERVER['SERVER_ADDR']);
+  $isApproved = false;
+
+  if(!$isLocal && !empty(APPROVED_LIST)) {
+    $ips = explode(";", APPROVED_LIST);
+
+    foreach($ips as $ip) {
+      if($_SERVER['REMOTE_ADDR'] == gethostbyname($ip)) {
+        $isApproved = true;
+        break;
+      }
+    }
+  }
+
+  if(!$isLocal && !$isApproved)
+    die('Access has not been approved from this location, please contact your systems\' administrator for further information.');
+
   session_start();
 
   if(empty($_SESSION['page']))
     $_SESSION['page'] = "login";
-
-  require_once __DIR__ . '\..\backend\activedirectory.php';
 ?>
 
 <!DOCTYPE html>
@@ -24,7 +39,9 @@
     <div class="container">
       <div class="containerheader">Self Service Desk - <?php echo COMPANY; ?></div>
       <div class="containerbody">
-        <div id="page"></div>
+        <div id="page">
+          <noscript><strong>Javascript is required to access this system.</strong></noscript>
+        </div>
       </div>
     </div>
     <script type="text/javascript">

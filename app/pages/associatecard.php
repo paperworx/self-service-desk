@@ -3,10 +3,10 @@
 
   session_start();
 
-  $_SESSION['page'] = "associatecard";
-
-  if(!isset($_SESSION['card']))
+  if(!isset($_SESSION['operator_mode']))
     die('User is not authenticated.');
+
+  $_SESSION['page'] = "associatecard";
 
   require_once __DIR__ . '\..\..\backend\activedirectory.php';
 ?>
@@ -14,5 +14,5 @@
 <p>This page is under construction.</p>
 
 <div class="subbuttons">
-  <a class="button small" onclick="loadPage('menu'); return false;">Go Back</a>
+  <a class="button small" onclick="loadPage('ops'); return false;">Go Back</a>
 </div>

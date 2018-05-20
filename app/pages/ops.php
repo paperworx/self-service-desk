@@ -11,6 +11,7 @@
 
 <div class="buttons">
   <a class="button big" onclick="loadPage('servicelog'); return false;"><img src="servicelog.png"><br>Service Log</a>
+  <a class="button big" onclick="loadPage('associatecard'); return false;"><img src="/associatecard.png"><br>Associate Card</a>
 </div>
 
 <div class="subbuttons">

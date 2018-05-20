@@ -52,10 +52,10 @@ a:hover.button {
   cursor: pointer;
 }
 
-a:hover.button,
-a:focus.button {
-  background-color: yellow;
-}
+/* a:hover.button, */
+/* a:focus.button { */
+  /* background-color: yellow; */
+/* } */
 
 a:active.button {
   background-color: limegreen;

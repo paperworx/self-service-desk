@@ -9,15 +9,14 @@
 
   define('COMPANY', "Acme Corporation");
 
-  define('ENABLE_ASSOCIATE_CARD', 0); // UNFINISHED
-  define('ENABLE_CHECK_CARD', 0); // UNFINISHED
-
   define('LDAP_HOST', "dc01.example.com");
   define('LDAP_PORT', 636);
   define('LDAP_USER', "CN=Example Web App,CN=Users,DC=example,DC=com");
   define('LDAP_PASS', "password");
   define('LDAP_FQDN', "DC=example,DC=com");
   define('LDAP_ATTRIBUTE', "employeeID");
+
+  define('APPROVED_LIST', "");
 
   define('SERVICE_PIN', "000000");
 ?>

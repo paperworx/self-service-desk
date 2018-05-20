@@ -85,7 +85,7 @@ REDIRECT;
 </div>
 
 <form onsubmit="loadPage('login', true, { card: scancard.value }); return false;" method="post">
-  <input id="scancard" type="password" autocomplete="off" autofocus>
+  <input id="scancard" type="text" autocomplete="off" autofocus>
   <input type="submit">
 </form>
 
