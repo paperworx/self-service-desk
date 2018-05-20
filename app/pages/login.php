@@ -25,6 +25,7 @@
       $_SESSION['name'] = $user['name'];
       $_SESSION['username'] = $user['username'];
       $_SESSION['card'] = $user['card'];
+      $_SESSION['operator'] = ($user['operator'] ? true : false);
 
       $servicelog->logEvent($_SESSION['name'] . " logged in.");
 
@@ -75,7 +76,7 @@
         var timeout = setTimeout(function() {
           processing = false;
           loadPage("login");
-        }, 2500);
+        }, 2000);
       </script>
 REDIRECT;
     } else {
@@ -88,7 +89,3 @@ REDIRECT;
   <input id="scancard" type="text" autocomplete="off" autofocus>
   <input type="submit">
 </form>
-
-<div class="subbuttons">
-  <a class="button small" onclick="loadPage('operatorlogin'); return false;">Operator Login</a>
-</div>

@@ -1,19 +1,14 @@
 <?php
   session_start();
 
-  if(!isset($_SESSION['card']) && !isset($_SESSION['operator_mode'])) {
+  if(!isset($_SESSION['card']) && !isset($_SESSION['operator']))
     die('Not logged in.');
-  }
 
   require_once __DIR__ . '\..\..\backend\servicelog.php';
 
   $servicelog = new ServiceLog();
 
-  if(isset($_SESSION['operator_mode']) && $_SESSION['operator_mode']) {
-    $servicelog->logEvent("Operator mode disengaged.");
-  } else {
-    $servicelog->logEvent($_SESSION['name'] . " logged out.");
-  }
+  $servicelog->logEvent($_SESSION['name'] . " logged out.");
 
   session_destroy();
 ?>

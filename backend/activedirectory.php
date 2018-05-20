@@ -41,13 +41,14 @@ class ActiveDirectory extends SelfServiceDesk {
 
     ldap_set_option($ldap, LDAP_OPT_PROTOCOL_VERSION, 3);
     ldap_set_option($ldap, LDAP_OPT_REFERRALS, 0);
+    ldap_set_option($ldap, LDAP_OPT_NETWORK_TIMEOUT, 5);
 
     $bind = @ldap_bind($ldap, LDAP_USER, LDAP_PASS);
 
     if(!$bind)
       return ['status' => "NO_CONNECTION"];
 
-    $search = ldap_search($ldap, LDAP_FQDN, "($attribute=$card)", array("displayName", "sAMAccountName", "$attribute", "userAccountControl"));
+    $search = ldap_search($ldap, LDAP_FQDN, "($attribute=$card)", array("displayName", "sAMAccountName", "$attribute", "userAccountControl", "memberOf"));
     $users = ldap_get_entries($ldap, $search);
 
     ldap_close($ldap);
@@ -63,8 +64,29 @@ class ActiveDirectory extends SelfServiceDesk {
     $displayName = $user['displayname'][0];
     $sAMAccountName = $user['samaccountname'][0];
     $ident = $user[strtolower($attribute)][0];
+    $memberOf = $user['memberof']['count'];
     $userAccountControl = $user['useraccountcontrol'][0];
     $accountDisabled = ($userAccountControl & 0x10002) == 0x10002;
+
+    $groupCount = $user['memberof']['count'];
+    $operators = explode(";", OPERATOR_LIST);
+    $operator = false;
+
+    for($i = 0; $i < $groupCount; $i++) {
+      $group = $user['memberof'][$i];
+      $groupName = explode(",", $group);
+
+      foreach($operators as $operatorGroup) {
+        if($groupName[0] == ("CN=" . $operatorGroup)) {
+          $operator = true;
+          break;
+        }
+      }
+
+      if($operator) {
+        break;
+      }
+    }
 
     if($accountDisabled)
       return ['status' => "DISABLED"];
@@ -73,6 +95,7 @@ class ActiveDirectory extends SelfServiceDesk {
       'name' => $displayName,
       'username' => $sAMAccountName,
       'card' => $ident,
+      'operator' => $operator,
       'status' => "SUCCESS"
     ];
 
@@ -84,6 +107,7 @@ class ActiveDirectory extends SelfServiceDesk {
 
     ldap_set_option($ldap, LDAP_OPT_PROTOCOL_VERSION, 3);
     ldap_set_option($ldap, LDAP_OPT_REFERRALS, 0);
+    ldap_set_option($ldap, LDAP_OPT_NETWORK_TIMEOUT, 5);
 
     @ldap_start_tls($ldap);
 

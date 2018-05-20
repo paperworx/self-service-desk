@@ -21,7 +21,7 @@
 
   session_start();
 
-  if(!isset($_SESSION['operator_mode']))
+  if(!isset($_SESSION['operator']))
     die('User is not authenticated.');
 
   $_SESSION['page'] = "servicelog";
@@ -66,5 +66,5 @@
 <div class="subbuttons">
   <a class="button small" onclick="loadPage('servicelog', true, { offset: <?php echo $offset - $displayed; ?>}); return false;">Newer</a>
   <a class="button small" onclick="loadPage('servicelog', true, { offset: <?php echo $offset + $displayed; ?>}); return false;">Older</a>
-  <a class="button small" onclick="loadPage('ops'); return false;">Go Back</a>
+  <a class="button small" onclick="loadPage('menu'); return false;">Go Back</a>
 </div>

@@ -9,14 +9,13 @@
 
   define('COMPANY', "Acme Corporation");
 
-  define('LDAP_HOST', "dc01.example.com");
+  define('LDAP_HOST', "dc01.example.local");
   define('LDAP_PORT', 636);
-  define('LDAP_USER', "CN=Example Web App,CN=Users,DC=example,DC=com");
+  define('LDAP_USER', "CN=Example Web App,CN=Users,DC=example,DC=local");
   define('LDAP_PASS', "password");
-  define('LDAP_FQDN', "DC=example,DC=com");
+  define('LDAP_FQDN', "DC=example,DC=local");
   define('LDAP_ATTRIBUTE', "employeeID");
 
-  define('APPROVED_LIST', "");
-
-  define('SERVICE_PIN', "000000");
+  define('APPROVED_LIST', "kiosk01.example.local;kiosk02.example.local");
+  define('OPERATOR_LIST', "Domain Admins;Enterprise Admins");
 ?>
